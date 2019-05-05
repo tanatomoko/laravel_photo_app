@@ -1,1 +1,2 @@
-# laravel_photo_app
+# ミドルウェア
+nginx, php(php-fpm)+laravel, mysql, redis
