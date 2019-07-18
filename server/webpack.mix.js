@@ -12,10 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.browserSync({
-    host: 'localhost',
     proxy: {
-        target: "http://localhost",
-        ws: true
+        target: 'nginx'
     }
 })
     .js('resources/js/app.js', 'public/js')

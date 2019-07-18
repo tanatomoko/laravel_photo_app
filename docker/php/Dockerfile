@@ -6,7 +6,7 @@ COPY php.ini /usr/local/etc/php/
 
 RUN apk update && apk upgrade && apk add --no-cache \
   libpng-dev\
-  nodejs \
+  nodejs-npm \
   tzdata \
   && docker-php-ext-install pdo_mysql mysqli gd \
   && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \

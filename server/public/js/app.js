@@ -52338,8 +52338,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/tomokotana/work/asakatsu/laravel_photo_app/server/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/tomokotana/work/asakatsu/laravel_photo_app/server/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/photo_app/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/photo_app/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
