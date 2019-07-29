@@ -66,7 +66,9 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
+            //api ミドルウェアグループでは、外部のアプリケーションから呼び出されるステートレスなWebAPI(GoogleMapAPIなど)が想定されている→セッションやクッキー、CSRF トークンを扱うミドルウェアが含まれていない
+            //今回実装するAPIは内部からしか呼ばれない且つクッキー認証を行うステートフルなもの→ミドルウェアグループは画面と同じwebに設定
+             ->middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }
