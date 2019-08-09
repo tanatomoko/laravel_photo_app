@@ -28,12 +28,15 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 // ルーティングの定義をインポートする
 import router from './router'
+//ストアをインポートする
+import store from './store'
 // ルートコンポーネントをインポートする
 import App from './components/App.vue'
 
 new Vue({
     el: '#app',
     router,
+    store,
     components: { App },//ルートコンポーネントの使用を宣言する
     template: '<App />'//ルートコンポーネントを描画する
 });
