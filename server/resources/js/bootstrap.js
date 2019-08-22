@@ -62,3 +62,11 @@ window.axios.interceptors.request.use(config => {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+//バリデーションエラーの処理（レスポンスを受けた後の処理を上書きする）
+//会員登録、ログイン、ログアウトのAPIで共通している部分をインターセプターにまとめる
+//第一引数は成功した時、第二引数は失敗した時
+window.axios.interceptors.response.use(
+    response => response,
+    error => error.response || error
+)
