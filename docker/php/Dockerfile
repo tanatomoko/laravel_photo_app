@@ -5,10 +5,16 @@ WORKDIR /var/www/photo_app
 COPY php.ini /usr/local/etc/php/
 
 RUN apk update && apk upgrade && apk add --no-cache \
-  libpng-dev\
+  freetype \
+  libpng \
+  libjpeg-turbo \
+  freetype-dev \
+  libpng-dev \
+  libjpeg-turbo-dev \
   nodejs-npm \
   tzdata \
-  && docker-php-ext-install pdo_mysql mysqli \
+  && docker-php-ext-configure gd --with-png-dir=/usr/include --with-jpeg-dir=/usr/include \
+  && docker-php-ext-install gd pdo_mysql mysqli \
   && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
   && apk del libpng-dev tzdata \
   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
