@@ -6,6 +6,7 @@
     </header>
     <main>
       <div class="container">
+        <Message />
         <RouterView /><!-- URL に対応する HTML 部品が入れ替わって描画される -->
       </div>
     </main>
@@ -14,12 +15,14 @@
 </template>
 
 <script>
+import Message from './Message.vue'
 import Navbar from './Navbar.vue'
 import Footer from './Footer.vue'
 import { INTERNAL_SERVER_ERROR } from '../util'
 
 export default {
   components: {
+    Message,
     Navbar,
     Footer
   },
