@@ -19,7 +19,6 @@ class Photo extends Model
     protected $visible = [
         'id', 'owner', 'url',
     ];
-
     /** IDの桁数 */
     const ID_LENGTH = 12;
 
