@@ -22,6 +22,8 @@ Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('/photos', 'PhotoController@create')->name('photo.create');
 Route::post('/photos/{photo}/comments', 'PhotoController@addComment')->name('photo.comment');
+Route::put('/photos/{id}/like', 'PhotoController@like')->name('photo.like');
+Route::delete('/photos/{id}/like', 'PhotoController@unlike');
 // 写真一覧
 Route::get('/photos', 'PhotoController@index')->name('photo.index');
 //写真詳細
