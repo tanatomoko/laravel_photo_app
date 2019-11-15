@@ -9,6 +9,7 @@ import PhotoDetail from './components/pages/PhotoDetail.vue'
 import store from './store'
 
 import SystemError from './components/pages/errors/System.vue'
+import NotFound from './components/pages/errors/NotFound.vue'
 
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
@@ -17,34 +18,38 @@ Vue.use(VueRouter)
 // パスとコンポーネントのマッピング
 const routes = [
     {
-        path: '/',
+        path: "/",
         component: PhotoList,
         props: route => {
-            const page = route.query.page
-            return { page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1 }
+            const page = route.query.page;
+            return { page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1 };
         }
     },
     {
-        path: '/photos/:id',
+        path: "/photos/:id",
         component: PhotoDetail,
         props: true
     },
     {
-        path: '/login',
+        path: "/login",
         component: Login,
         beforeEnter(to, from, next) {
-            if (store.getters['auth/check']) {
-                next('/')
+            if (store.getters["auth/check"]) {
+                next("/");
             } else {
-                next()
+                next();
             }
         }
     },
     {
-        path: '/500',
+        path: "/500",
         component: SystemError
+    },
+    {
+        path: "*",
+        component: NotFound
     }
-]
+];
 
 // VueRouterインスタンスを作成する
 const router = new VueRouter({
