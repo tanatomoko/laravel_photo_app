@@ -26,7 +26,23 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+// ルーティングの定義をインポートする
+import router from './router'
+//ストアをインポートする
+import store from './store'
+// ルートコンポーネントをインポートする
+import App from './components/App.vue'
 
-const app = new Vue({
-    el: '#app',
-});
+const createApp = async () => {
+    await store.dispatch('auth/currentUser')
+
+    new Vue({
+        el: '#app',
+        router,
+        store,
+        components: { App },//ルートコンポーネントの使用を宣言する
+        template: '<App />'//ルートコンポーネントを描画する
+    })
+}
+
+createApp()

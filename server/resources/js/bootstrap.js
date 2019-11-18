@@ -19,9 +19,18 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
+import { getCookieValue } from './util'
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios = require('axios')
+
+// Ajaxリクエストであることを示すヘッダーを付与する
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+
+window.axios.interceptors.request.use(config => {
+    // クッキーからトークンを取り出してヘッダーに添付する
+    config.headers['X-XSRF-TOKEN'] = getCookieValue('XSRF-TOKEN')
+    return config
+})
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -29,13 +38,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * a simple convenience so we don't have to attach every token manually.
  */
 
-let token = document.head.querySelector('meta[name="csrf-token"]');
+// let token = document.head.querySelector('meta[name="csrf-token"]');
 
-if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
+// if (token) {
+//     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+// } else {
+//     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+// }
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -53,3 +62,11 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+//バリデーションエラーの処理（レスポンスを受けた後の処理を上書きする）
+//会員登録、ログイン、ログアウトのAPIで共通している部分をインターセプターにまとめる
+//第一引数は成功した時、第二引数は失敗した時
+window.axios.interceptors.response.use(
+    response => response,
+    error => error.response || error
+)
